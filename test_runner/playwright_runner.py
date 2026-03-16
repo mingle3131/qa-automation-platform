@@ -2,6 +2,9 @@
 Playwright 기반 브라우저 자동화 테스트 러너
 saucedemo.com 로그인 테스트를 실행하고 결과를 스크린샷으로 저장합니다.
 """
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import json
 import re
@@ -9,6 +12,8 @@ from datetime import datetime
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from analyzer.db_manager import save_result, create_tables, get_summary
+from notifier.slack_notifier import send_slack_notification
 
 
 # 스크린샷 저장 경로
@@ -155,6 +160,9 @@ def run_login_test(test_case: dict = None) -> str:
 
     판정 기준: expected_result 내용에 따라 동적으로 결정
     """
+    # 이번 실행 묶음을 식별하는 run_id 생성 (같은 실행 세션의 결과를 그룹핑할 때 사용)
+    run_id = datetime.now().strftime("run_%Y%m%d_%H%M%S")
+
     # 테스트 케이스 정보 추출 (없으면 기본값 사용)
     if test_case:
         test_id = test_case.get("test_id", "")
@@ -205,14 +213,28 @@ def run_login_test(test_case: dict = None) -> str:
             result = "PASS" if is_pass else "FAIL"
             print(f"  [결과] {result} - 현재 URL: {page.url}")
 
-            # 7. 결과 스크린샷 저장
-            save_screenshot(page, result, test_id)
+            # 7. 결과 스크린샷 저장 및 DB 기록
+            save_result(
+                test_id=test_id,
+                title=title,
+                result=result,
+                screenshot_path=str(save_screenshot(page, result, test_id)),
+                error_message=None,
+                run_id=run_id,
+            )
 
         except Exception as e:
-            # 예외 발생 시 FAIL 처리 후 스크린샷 저장
+            # 예외 발생 시 FAIL 처리 후 스크린샷 저장 및 DB 기록
             result = "FAIL"
             print(f"  [오류] 테스트 중 예외 발생: {e}")
-            save_screenshot(page, result, test_id)
+            save_result(
+                test_id=test_id,
+                title=title,
+                result="FAIL",
+                screenshot_path=str(save_screenshot(page, "FAIL", test_id)),
+                error_message=str(e),
+                run_id=run_id,
+            )
 
         finally:
             # 브라우저 종료
@@ -268,6 +290,9 @@ def save_log(results: list) -> Path:
 
 
 if __name__ == "__main__":
+    # DB 테이블 초기화 (없으면 생성, 있으면 무시)
+    create_tables()
+
     print("=" * 50)
     print("  saucedemo.com 로그인 테스트 시작")
     print("=" * 50)
@@ -307,3 +332,7 @@ if __name__ == "__main__":
     # 전체 루프 완료 후 로그 파일 저장
     log_path = save_log(results)
     print(f"\n[로그] 테스트 결과 로그 저장 완료: {log_path}")
+
+    # DB에서 전체 결과 요약 가져와 Slack 알림 전송
+    summary = get_summary()
+    send_slack_notification(summary)
