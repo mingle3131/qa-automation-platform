@@ -1,0 +1,31 @@
+﻿id,test_id,title,result,screenshot_path,error_message,executed_at,run_id
+30,TC-015,로그인 페이지 UI 요소 확인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-015_PASS_20260316_213510.png,,2026-03-16 21:35:10,run_20260316_213507
+29,TC-014,XSS 공격 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-014_PASS_20260316_213506.png,,2026-03-16 21:35:06,run_20260316_213501
+28,TC-013,SQL Injection 공격 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-013_PASS_20260316_213500.png,,2026-03-16 21:35:00,run_20260316_213457
+27,TC-012,Enter 키로 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-012_PASS_20260316_213456.png,,2026-03-16 21:34:56,run_20260316_213451
+26,TC-011,에러 메시지 X 버튼으로 닫기,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-011_PASS_20260316_213451.png,,2026-03-16 21:34:51,run_20260316_213448
+25,TC-010,비밀번호 필드 마스킹 확인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-010_PASS_20260316_213447.png,,2026-03-16 21:34:47,run_20260316_213444
+24,TC-009,performance_glitch_user 계정으로 로그인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-009_PASS_20260316_213444.png,,2026-03-16 21:34:44,run_20260316_213436
+23,TC-008,problem_user 계정으로 로그인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-008_PASS_20260316_213435.png,,2026-03-16 21:34:36,run_20260316_213432
+22,TC-007,모든 필드 비워두고 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-007_PASS_20260316_213431.png,,2026-03-16 21:34:32,run_20260316_213428
+21,TC-006,잠긴 사용자 계정으로 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-006_PASS_20260316_213427.png,,2026-03-16 21:34:27,run_20260316_213421
+20,TC-005,비밀번호 필드 비워두고 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-005_PASS_20260316_213420.png,,2026-03-16 21:34:20,run_20260316_213417
+19,TC-004,사용자명 필드 비워두고 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-004_PASS_20260316_213417.png,,2026-03-16 21:34:17,run_20260316_213414
+18,TC-003,잘못된 사용자명으로 로그인 실패,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-003_PASS_20260316_213413.png,,2026-03-16 21:34:13,run_20260316_213407
+17,TC-002,잘못된 비밀번호로 로그인 실패,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-002_PASS_20260316_213407.png,,2026-03-16 21:34:07,run_20260316_213401
+16,TC-001,유효한 자격 증명으로 로그인 성공,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-001_PASS_20260316_213400.png,,2026-03-16 21:34:01,run_20260316_213357
+15,TC-015,로그인 페이지 UI 요소 확인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-015_PASS_20260316_211827.png,,2026-03-16 21:18:27,run_20260316_211823
+14,TC-014,XSS 공격 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-014_PASS_20260316_211822.png,,2026-03-16 21:18:22,run_20260316_211816
+13,TC-013,SQL Injection 공격 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-013_PASS_20260316_211815.png,,2026-03-16 21:18:15,run_20260316_211812
+12,TC-012,Enter 키로 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-012_PASS_20260316_211812.png,,2026-03-16 21:18:12,run_20260316_211808
+11,TC-011,에러 메시지 X 버튼으로 닫기,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-011_PASS_20260316_211808.png,,2026-03-16 21:18:08,run_20260316_211805
+10,TC-010,비밀번호 필드 마스킹 확인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-010_PASS_20260316_211804.png,,2026-03-16 21:18:04,run_20260316_211801
+9,TC-009,performance_glitch_user 계정으로 로그인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-009_PASS_20260316_211800.png,,2026-03-16 21:18:01,run_20260316_211753
+8,TC-008,problem_user 계정으로 로그인,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-008_PASS_20260316_211753.png,,2026-03-16 21:17:53,run_20260316_211750
+7,TC-007,모든 필드 비워두고 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-007_PASS_20260316_211749.png,,2026-03-16 21:17:49,run_20260316_211746
+6,TC-006,잠긴 사용자 계정으로 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-006_PASS_20260316_211746.png,,2026-03-16 21:17:46,run_20260316_211740
+5,TC-005,비밀번호 필드 비워두고 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-005_PASS_20260316_211739.png,,2026-03-16 21:17:39,run_20260316_211735
+4,TC-004,사용자명 필드 비워두고 로그인 시도,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-004_PASS_20260316_211735.png,,2026-03-16 21:17:35,run_20260316_211731
+3,TC-003,잘못된 사용자명으로 로그인 실패,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-003_PASS_20260316_211731.png,,2026-03-16 21:17:31,run_20260316_211725
+2,TC-002,잘못된 비밀번호로 로그인 실패,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-002_PASS_20260316_211725.png,,2026-03-16 21:17:25,run_20260316_211719
+1,TC-001,유효한 자격 증명으로 로그인 성공,PASS,C:\Users\lmj03\qa-automation-platform\data\screenshots\login_TC-001_PASS_20260316_211718.png,,2026-03-16 21:17:18,run_20260316_211715
