@@ -3,12 +3,20 @@ Playwright 기반 브라우저 자동화 테스트 러너
 saucedemo.com 로그인 테스트를 실행하고 결과를 스크린샷으로 저장합니다.
 """
 
+import sys
+import os
+
+# 프로젝트 루트를 Python 경로에 추가
+# → 어떤 위치에서 실행하든 analyzer, test_runner 등 모듈을 찾을 수 있게 함
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import json
 import re
 from datetime import datetime
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from analyzer.db_manager import save_result, create_tables
 
 
 # 스크린샷 저장 경로
@@ -155,6 +163,9 @@ def run_login_test(test_case: dict = None) -> str:
 
     판정 기준: expected_result 내용에 따라 동적으로 결정
     """
+    # 이번 실행 묶음을 식별하는 run_id 생성 (같은 실행 세션의 결과를 그룹핑할 때 사용)
+    run_id = datetime.now().strftime("run_%Y%m%d_%H%M%S")
+
     # 테스트 케이스 정보 추출 (없으면 기본값 사용)
     if test_case:
         test_id = test_case.get("test_id", "")
@@ -206,13 +217,35 @@ def run_login_test(test_case: dict = None) -> str:
             print(f"  [결과] {result} - 현재 URL: {page.url}")
 
             # 7. 결과 스크린샷 저장
-            save_screenshot(page, result, test_id)
+            screenshot_path = save_screenshot(page, result, test_id)
+
+            # 8. DB에 결과 저장 (PASS/FAIL 공통 처리)
+            # FAIL인 경우 기댓값 불일치 원인을 error_message에 기록
+            error_message = None if result == "PASS" else f"기댓값 불일치 (URL: {page.url})"
+            save_result(
+                test_id=test_case.get("test_id", "UNKNOWN") if test_case else "UNKNOWN",
+                title=test_case.get("title", "") if test_case else "",
+                result=result,
+                screenshot_path=str(screenshot_path),
+                error_message=error_message,
+                run_id=run_id,
+            )
 
         except Exception as e:
             # 예외 발생 시 FAIL 처리 후 스크린샷 저장
             result = "FAIL"
             print(f"  [오류] 테스트 중 예외 발생: {e}")
-            save_screenshot(page, result, test_id)
+            screenshot_path = save_screenshot(page, result, test_id)
+
+            # DB에 FAIL 결과 저장 (예외 메시지를 error_message에 기록)
+            save_result(
+                test_id=test_case.get("test_id", "UNKNOWN") if test_case else "UNKNOWN",
+                title=test_case.get("title", "") if test_case else "",
+                result="FAIL",
+                screenshot_path=str(screenshot_path),
+                error_message=str(e),
+                run_id=run_id,
+            )
 
         finally:
             # 브라우저 종료
@@ -268,6 +301,9 @@ def save_log(results: list) -> Path:
 
 
 if __name__ == "__main__":
+    # DB 테이블이 없을 경우 자동 생성 (최초 실행 시 필요)
+    create_tables()
+
     print("=" * 50)
     print("  saucedemo.com 로그인 테스트 시작")
     print("=" * 50)
