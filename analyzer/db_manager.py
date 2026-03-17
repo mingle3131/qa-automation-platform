@@ -83,16 +83,23 @@ def fetch_all_results():
     return results
 
 
-def get_summary():
+def get_summary(run_id: str = None):
     conn = get_connection()
 
-    # 전체 레코드 수 조회
-    total = conn.execute("SELECT COUNT(*) FROM test_results").fetchone()[0]
-
-    # PASS인 레코드 수 조회
-    passed = conn.execute(
-        "SELECT COUNT(*) FROM test_results WHERE result = 'PASS'"
-    ).fetchone()[0]
+    if run_id:
+        # 특정 run_id의 결과만 집계 (누적 방지)
+        total = conn.execute(
+            "SELECT COUNT(*) FROM test_results WHERE run_id = ?", (run_id,)
+        ).fetchone()[0]
+        passed = conn.execute(
+            "SELECT COUNT(*) FROM test_results WHERE result = 'PASS' AND run_id = ?", (run_id,)
+        ).fetchone()[0]
+    else:
+        # run_id 미지정 시 전체 레코드 집계
+        total = conn.execute("SELECT COUNT(*) FROM test_results").fetchone()[0]
+        passed = conn.execute(
+            "SELECT COUNT(*) FROM test_results WHERE result = 'PASS'"
+        ).fetchone()[0]
 
     conn.close()
 

@@ -81,3 +81,37 @@ def save_test_cases(test_cases: dict) -> Path:
 
     print(f"[저장 완료] 테스트 케이스가 저장되었습니다: {file_path}")
     return file_path
+
+
+if __name__ == "__main__":
+    feature_description = """
+네이버 쇼핑 상품 상세 페이지 기능.
+'노트북' 검색 후 첫 번째 상품을 클릭했을 때 이동하는 상세 페이지를 기준으로 한다.
+대상: https://search.shopping.naver.com/search/all?query=노트북 에서 첫 번째 상품 클릭
+
+검증해야 할 기능:
+- 상품명이 페이지에 노출되는지
+- 가격 정보가 노출되는지
+- 상품 이미지가 노출되는지
+- 구매하기 또는 최저가 보기 버튼이 존재하는지
+- 판매처 정보(판매처명)가 노출되는지
+- 상품 상세 설명 영역이 존재하는지
+- 가격비교 탭 또는 판매처 목록 영역이 존재하는지
+- 리뷰/평점 영역이 노출되는지
+- 페이지 타이틀(브라우저 탭 제목)이 비어있지 않은지
+- 페이지 로딩 후 주요 UI 요소들이 정상 렌더링되는지
+테스트 케이스 ID는 TC-021부터 시작해줘.
+정확히 10개의 테스트 케이스를 JSON 배열로 생성해줘.
+"""
+
+    print("=== AI 테스트 케이스 생성 시작 ===")
+    print(f"기능 명세: {feature_description[:50]}...")
+
+    result = generate_test_cases(feature_description)
+
+    if result:
+        save_test_cases(result)
+        print("\n=== 생성된 테스트 케이스 ===")
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    else:
+        print("[실패] 테스트 케이스 생성에 실패했습니다.")

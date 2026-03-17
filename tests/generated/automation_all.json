@@ -1,0 +1,338 @@
+{
+  "test_cases": [
+    {
+      "test_id": "TC-001",
+      "title": "정상 키워드로 검색 시 결과 목록 노출 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 'dress' 입력",
+        "검색 버튼 클릭 또는 Enter 키 입력"
+      ],
+      "expected_result": "검색 결과 페이지로 이동하고 'dress' 관련 상품 목록이 노출됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-002",
+      "title": "빈 검색어로 검색 시 처리 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 아무것도 입력하지 않음",
+        "검색 버튼 클릭"
+      ],
+      "expected_result": "검색이 실행되지 않거나 적절한 안내 메시지가 표시됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-003",
+      "title": "존재하지 않는 키워드 검색 시 결과 없음 처리 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 'xyzabc123456' 입력",
+        "검색 버튼 클릭"
+      ],
+      "expected_result": "검색 결과 페이지에 '결과 없음' 또는 해당하는 안내 메시지가 표시됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-004",
+      "title": "검색 결과 페이지에 검색어 표시 여부 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 'shirt' 입력",
+        "검색 버튼 클릭",
+        "검색 결과 페이지 상단 확인"
+      ],
+      "expected_result": "검색 결과 페이지에 입력한 검색어 'shirt'가 표시됨",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-005",
+      "title": "공백만 입력하여 검색 시 처리 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 공백 여러 개 입력",
+        "검색 버튼 클릭"
+      ],
+      "expected_result": "검색이 실행되지 않거나 빈 검색어와 동일하게 처리됨",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-006",
+      "title": "특수문자로 검색 시 처리 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 '@#$%^&*' 입력",
+        "검색 버튼 클릭"
+      ],
+      "expected_result": "에러 없이 검색이 처리되고 결과 없음 또는 관련 결과가 표시됨",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-007",
+      "title": "Enter 키로 검색 실행 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 'top' 입력",
+        "Enter 키 입력"
+      ],
+      "expected_result": "검색 버튼 클릭과 동일하게 검색 결과 페이지로 이동함",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-008",
+      "title": "대소문자 구분 없이 검색 결과 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 'DRESS' 입력 후 검색",
+        "결과 확인 후 다시 메인 페이지로 이동",
+        "상단 검색창에 'dress' 입력 후 검색",
+        "두 검색 결과 비교"
+      ],
+      "expected_result": "대소문자와 관계없이 동일한 검색 결과가 노출됨",
+      "priority": "Low"
+    },
+    {
+      "test_id": "TC-009",
+      "title": "긴 검색어 입력 시 처리 확인",
+      "preconditions": "automationexercise.com 메인 페이지에 접속한 상태",
+      "steps": [
+        "상단 검색창에 200자 이상의 긴 문자열 입력",
+        "검색 버튼 클릭"
+      ],
+      "expected_result": "에러 없이 검색이 처리되거나 입력 길이 제한 안내가 표시됨",
+      "priority": "Low"
+    },
+    {
+      "test_id": "TC-010",
+      "title": "검색 결과에서 상품 클릭 후 상세 페이지 이동 확인",
+      "preconditions": "automationexercise.com에서 'dress' 검색 후 결과 페이지에 있는 상태",
+      "steps": [
+        "검색 결과 목록에서 첫 번째 상품 클릭"
+      ],
+      "expected_result": "해당 상품의 상세 페이지로 정상 이동함",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-011",
+      "title": "상품 목록 페이지 정상 접근 확인",
+      "preconditions": "브라우저가 정상 실행된 상태",
+      "steps": [
+        "1. 브라우저를 실행한다",
+        "2. https://automationexercise.com/products URL로 이동한다"
+      ],
+      "expected_result": "상품 목록 페이지가 정상적으로 로드되고 'All Products' 타이틀이 표시된다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-012",
+      "title": "상품 카드 목록 노출 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 페이지 내 상품 카드 영역을 확인한다"
+      ],
+      "expected_result": "1개 이상의 상품 카드가 그리드 형태로 노출된다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-013",
+      "title": "상품 카드에 상품명 표시 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 각 상품 카드 내 상품명 영역을 확인한다"
+      ],
+      "expected_result": "모든 상품 카드에 상품명이 텍스트로 표시되며 빈 값이 아니다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-014",
+      "title": "상품 카드에 가격 표시 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 각 상품 카드 내 가격 영역을 확인한다"
+      ],
+      "expected_result": "모든 상품 카드에 가격이 'Rs. [숫자]' 형식으로 표시된다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-015",
+      "title": "상품 카드에 이미지 노출 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 각 상품 카드 내 이미지 영역을 확인한다"
+      ],
+      "expected_result": "모든 상품 카드에 상품 이미지가 정상적으로 로드되어 표시된다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-016",
+      "title": "상품 카드에 View Product 버튼 존재 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 각 상품 카드 내 View Product 버튼을 확인한다"
+      ],
+      "expected_result": "모든 상품 카드에 'View Product' 버튼이 존재하며 클릭 가능한 상태이다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-017",
+      "title": "View Product 버튼 클릭 시 상품 상세 페이지 이동 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 첫 번째 상품의 View Product 버튼을 클릭한다"
+      ],
+      "expected_result": "해당 상품의 상세 페이지(/product_details/[id])로 이동한다",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-018",
+      "title": "카테고리 필터 UI 존재 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 좌측 사이드바의 카테고리 필터 영역을 확인한다"
+      ],
+      "expected_result": "Category 섹션이 존재하며 Women, Men, Kids 등의 카테고리 옵션이 표시된다",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-019",
+      "title": "카테고리 필터 펼침/접힘 동작 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. Women 카테고리를 클릭하여 하위 메뉴를 펼친다",
+        "3. 다시 클릭하여 접는다"
+      ],
+      "expected_result": "카테고리 클릭 시 하위 카테고리 목록이 펼쳐지고 재클릭 시 접힌다",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-020",
+      "title": "상품 이미지 깨짐 여부 확인",
+      "preconditions": "상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "1. 상품 목록 페이지로 이동한다",
+        "2. 모든 상품 카드의 이미지 로드 상태를 확인한다"
+      ],
+      "expected_result": "모든 상품 이미지가 깨지지 않고 정상적으로 표시되며 alt 속성이 존재한다",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-021",
+      "title": "상품 상세 페이지 진입 확인",
+      "preconditions": "automationexercise.com 상품 목록 페이지에 접속한 상태",
+      "steps": [
+        "상품 목록 페이지에서 첫 번째 상품의 'View Product' 버튼 클릭",
+        "상세 페이지 URL 확인"
+      ],
+      "expected_result": "상품 상세 페이지로 정상 이동하며 URL에 '/product_details/'가 포함됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-022",
+      "title": "상품명 노출 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "상품 상세 페이지 상단 영역 확인",
+        "상품명 텍스트 존재 여부 확인"
+      ],
+      "expected_result": "상품명이 화면에 명확하게 노출되며 빈 값이 아님",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-023",
+      "title": "상품 가격 노출 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "상품 정보 영역에서 가격 정보 확인",
+        "가격 형식 확인"
+      ],
+      "expected_result": "가격이 'Rs. XXX' 형식으로 정상 노출됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-024",
+      "title": "상품 설명 노출 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "상품 정보 영역 스크롤",
+        "상품 설명 텍스트 확인"
+      ],
+      "expected_result": "상품에 대한 설명이 노출되며 빈 값이 아님",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-025",
+      "title": "상품 이미지 노출 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "상품 이미지 영역 확인",
+        "이미지 로딩 상태 확인"
+      ],
+      "expected_result": "상품 이미지가 깨지지 않고 정상적으로 노출됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-026",
+      "title": "수량 입력 필드 존재 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "수량 입력 필드 존재 여부 확인",
+        "기본값 확인"
+      ],
+      "expected_result": "수량 입력 필드가 존재하며 기본값 '1'이 설정되어 있음",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-027",
+      "title": "수량 입력 필드 값 변경 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "수량 입력 필드의 기존 값 삭제",
+        "새로운 수량 '5' 입력",
+        "입력된 값 확인"
+      ],
+      "expected_result": "수량이 정상적으로 '5'로 변경됨",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-028",
+      "title": "Add to Cart 버튼 존재 및 클릭 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "Add to Cart 버튼 존재 여부 확인",
+        "Add to Cart 버튼 클릭"
+      ],
+      "expected_result": "Add to Cart 버튼이 존재하며 클릭 시 장바구니 추가 확인 모달이 노출됨",
+      "priority": "High"
+    },
+    {
+      "test_id": "TC-029",
+      "title": "카테고리 정보 노출 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "상품 정보 영역에서 카테고리 정보 확인",
+        "카테고리 텍스트 내용 확인"
+      ],
+      "expected_result": "카테고리 정보가 'Category:' 라벨과 함께 정상 노출됨",
+      "priority": "Medium"
+    },
+    {
+      "test_id": "TC-030",
+      "title": "브랜드 정보 노출 확인",
+      "preconditions": "상품 상세 페이지에 접속한 상태",
+      "steps": [
+        "상품 정보 영역에서 브랜드 정보 확인",
+        "브랜드 텍스트 내용 확인"
+      ],
+      "expected_result": "브랜드 정보가 'Brand:' 라벨과 함께 정상 노출됨",
+      "priority": "Medium"
+    }
+  ]
+}

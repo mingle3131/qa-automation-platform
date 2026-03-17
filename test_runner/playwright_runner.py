@@ -151,7 +151,7 @@ def save_screenshot(page, result: str, test_id: str = "") -> Path:
     return filepath
 
 
-def run_login_test(test_case: dict = None) -> str:
+def run_login_test(test_case: dict = None, run_id: str = None) -> str:
     """
     saucedemo.com 로그인 테스트를 실행합니다.
 
@@ -160,8 +160,9 @@ def run_login_test(test_case: dict = None) -> str:
 
     판정 기준: expected_result 내용에 따라 동적으로 결정
     """
-    # 이번 실행 묶음을 식별하는 run_id 생성 (같은 실행 세션의 결과를 그룹핑할 때 사용)
-    run_id = datetime.now().strftime("run_%Y%m%d_%H%M%S")
+    # run_id가 주입되지 않은 경우에만 새로 생성 (단독 실행 시)
+    if run_id is None:
+        run_id = datetime.now().strftime("run_%Y%m%d_%H%M%S")
 
     # 테스트 케이스 정보 추출 (없으면 기본값 사용)
     if test_case:
@@ -304,10 +305,13 @@ if __name__ == "__main__":
         print("[종료] 실행할 테스트 케이스가 없습니다.")
         exit(1)
 
+    # 전체 실행 세션 run_id 생성 (모든 케이스가 동일한 run_id 공유)
+    run_id = datetime.now().strftime("run_%Y%m%d_%H%M%S")
+
     # 각 테스트 케이스 실행 및 결과 수집
     results = []
     for test_case in test_cases:
-        result = run_login_test(test_case)
+        result = run_login_test(test_case, run_id)
         results.append({
             "test_id": test_case.get("test_id", ""),
             "title": test_case.get("title", ""),
@@ -333,6 +337,6 @@ if __name__ == "__main__":
     log_path = save_log(results)
     print(f"\n[로그] 테스트 결과 로그 저장 완료: {log_path}")
 
-    # DB에서 전체 결과 요약 가져와 Slack 알림 전송
-    summary = get_summary()
+    # DB에서 이번 run_id 결과만 요약하여 Slack 알림 전송
+    summary = get_summary(run_id)
     send_slack_notification(summary)
